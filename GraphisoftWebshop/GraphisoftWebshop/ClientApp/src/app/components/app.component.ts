@@ -15,7 +15,7 @@ import { Router, NavigationStart } from '@angular/router';
 export class AppComponent implements OnInit {
 
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        console.log("AppComponnent");
     }
 
 }

@@ -6,16 +6,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { HomeComponent } from "./components/home/home.component";
+import { WorkshopMainComponent } from './components/workshop-main/workshop-main.component';
+import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            { path: "", component: HomeComponent, data: { title: "Home" } },
-            { path: "home", redirectTo: "/", pathMatch: "full" },
-            { path: "**", component: NotFoundComponent, data: { title: "Page Not Found" } },
+            {
+                path: "",
+                component: WorkshopMainComponent,
+                children: [
+                    {
+                        path: "create",
+                        component: ProductCreateComponent,
+                    },
+                    {
+                        path: "",
+                        redirectTo: 'create',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: "**",
+                        component: NotFoundComponent,
+                        data: { title: "Page Not Found" }
+                    },
+
+                ]
+            },
         ])
     ],
     exports: [

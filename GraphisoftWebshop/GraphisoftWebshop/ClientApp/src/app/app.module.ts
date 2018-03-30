@@ -13,7 +13,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppErrorHandler } from './app-error.handler';
 
 import { AppComponent } from "./components/app.component";
-import { HomeComponent } from "./components/home/home.component";
+import { ProductCreateComponent } from './product/product-create/product-create.component';
+import { WorkshopMainComponent } from "./components/workshop-main/workshop-main.component";
+import { NotFoundComponent } from "./components/not-found/not-found.component";
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { HomeComponent } from "./components/home/home.component";
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
+        WorkshopMainComponent,
+        ProductCreateComponent,
+        NotFoundComponent,
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
@@ -35,9 +39,6 @@ import { HomeComponent } from "./components/home/home.component";
 })
 export class AppModule {
 }
-
-
-
 
 export function getBaseUrl() {
     return document.getElementsByTagName('base')[0].href;
