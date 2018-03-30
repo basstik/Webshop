@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkshopMainComponent implements OnInit {
 
+    appTitle = "Webshop";
+    appLogo = require("../../assets/images/logo.png");
+
   constructor() { }
 
   ngOnInit() {

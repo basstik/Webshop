@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCreateComponent implements OnInit {
 
-    appTitle = "Webshop";
-
   constructor() { }
 
   ngOnInit() {
