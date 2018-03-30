@@ -50,22 +50,5 @@ namespace GraphisoftWebshop.Helpers
                 writer.WriteLine($"{DateTime.Now} - {text}");
             }
         }
-
-
-
-        public static string GetUserId(ClaimsPrincipal user)
-        {
-            return user.FindFirst(OpenIdConnectConstants.Claims.Subject)?.Value?.Trim();
-        }
-
-
-
-        public static string[] GetRoles(ClaimsPrincipal identity)
-        {
-            return identity.Claims
-                .Where(c => c.Type == OpenIdConnectConstants.Claims.Role)
-                .Select(c => c.Value)
-                .ToArray();
-        }
     }
 }

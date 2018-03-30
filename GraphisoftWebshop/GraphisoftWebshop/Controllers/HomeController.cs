@@ -26,12 +26,8 @@ namespace GraphisoftWebshop.Controllers
             return View();
         }
 
-
-
-
-
         // GET api/values
-        [Route("api/[controller]"), Authorize, HttpGet]
+        [Route("api/[controller]"), HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
