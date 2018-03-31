@@ -47,6 +47,7 @@ namespace GraphisoftWebshop
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
+                // https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], b => b.MigrationsAssembly("GraphisoftWebshop"));
                 options.UseOpenIddict();
             });
@@ -76,9 +77,6 @@ namespace GraphisoftWebshop
                     TokenUrl = "/connect/token"
                 });
             });
-
-            // Repositories
-            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
 
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();

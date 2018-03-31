@@ -4,14 +4,12 @@
 // ====================================================
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DAL.Models.Interfaces
+namespace DAL.Models
 {
-    public interface IAuditableEntity
+    internal interface IAuditableEntity
     {
+        String CreatedBy { get; set; }
         DateTime CreatedDate { get; set; }
-        DateTime UpdatedDate { get; set; }
     }
 }

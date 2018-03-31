@@ -3,19 +3,16 @@
 // Email: support@ebenmonney.com
 // ====================================================
 
-using DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using DAL.Models.Interfaces;
 
-namespace DAL
+namespace DAL.Models
 {
-    public interface IUnitOfWork
+    public class BaseEntity : IBaseEntity
     {
-        IProductRepository Products { get; }
-
-        int SaveChanges();
+        public int Id { get; set; }
     }
 }

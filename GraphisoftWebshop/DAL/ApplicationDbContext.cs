@@ -21,22 +21,22 @@ namespace DAL
 
         public DbSet<Product> Products { get; set; }
 
-
-
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-       
-            builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
-            builder.Entity<Product>().HasIndex(p => p.Name);
-            builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
-            builder.Entity<Product>().Property(p => p.Icon).IsUnicode(false).HasMaxLength(256);
-            builder.Entity<Product>().ToTable($"App{nameof(this.Products)}");
 
+            builder.Entity<Product>().Property(p => p.Category).IsRequired();
+            builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
+            builder.Entity<Product>().HasIndex(p => p.Name);        //TODO
+            builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
+            builder.Entity<Product>().Property(p => p.Price).IsRequired();
+            builder.Entity<Product>().Property(p => p.CreatedBy).HasMaxLength(100);
+            builder.Entity<Product>().Property(p => p.Email).IsRequired().HasMaxLength(100);
+            builder.Entity<Product>().Property(p => p.CreatedDate).IsRequired();
+            builder.Entity<Product>().ToTable($"Webshop{nameof(this.Products)}");
         }
 
 
@@ -71,7 +71,7 @@ namespace DAL
         private void UpdateAuditEntities()
         {
             var modifiedEntries = ChangeTracker.Entries()
-                .Where(x => x.Entity is IAuditableEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+                .Where(x => x.Entity is IBaseEntity && x.Entity is IAuditableEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
 
             foreach (var entry in modifiedEntries)
@@ -87,8 +87,6 @@ namespace DAL
                 {
                     base.Entry(entity).Property(x => x.CreatedDate).IsModified = false;
                 }
-
-                entity.UpdatedDate = now;
             }
         }
     }

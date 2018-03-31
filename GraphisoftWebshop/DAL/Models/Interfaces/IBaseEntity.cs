@@ -3,15 +3,14 @@
 // Email: support@ebenmonney.com
 // ====================================================
 
-using DAL.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace DAL.Repositories.Interfaces
+namespace DAL.Models.Interfaces
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IBaseEntity
     {
-
+        int Id { get; set; }
     }
 }

@@ -39,29 +39,30 @@ namespace DAL
 
                 Product prod_1 = new Product
                 {
-                    Name = "BMW M6",
-                    Description = "Yet another masterpiece from the world's best car manufacturer",
-                    BuyingPrice = 109775,
-                    SellingPrice = 114234,
-                    UnitsInStock = 12,
-                    IsActive = true,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
+                    Category = "Sport",
+                    Name = "Nike Football ",
+                    Description = "Yet another masterpiece from the world's best Nike football manufacturer",
+                    Price = 995,
+                    CreatedBy = "Thomas",
+                    Email = "tomi@gmail.com",
                 };
 
-                Product prod_2 = new Product
-                {
-                    Name = "Nissan Patrol",
-                    Description = "A true man's choice",
-                    BuyingPrice = 78990,
-                    SellingPrice = 86990,
-                    UnitsInStock = 4,
-                    IsActive = true,
-                    DateCreated = DateTime.UtcNow,
-                    DateModified = DateTime.UtcNow
-                };
+            Product prod_2 = new Product
+            {
+                Category = "Car",
+                Name = "BMW sport car",
+                Description = "This is the best car.",
+                Price = 1000000,
+                CreatedBy = "Peter",
+                Email = "peter10@gmail.com",
+            };
 
+            _context.Products.Add(prod_1);
+            _context.Products.Add(prod_2);
 
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Seeding initial data completed");
 
         }
     }
