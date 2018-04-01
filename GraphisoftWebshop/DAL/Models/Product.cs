@@ -4,6 +4,7 @@
 // ====================================================
 
 using System;
+using System.Collections.Generic;
 using DAL.Models.Interfaces;
 
 namespace DAL.Models
@@ -18,10 +19,5 @@ namespace DAL.Models
         public String CreatedBy { get; set; }
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
-    }
-
-    public enum Grade
-    {
-        A, B, C, D, F
     }
 }

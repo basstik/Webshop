@@ -1,3 +1,23 @@
 <p>
-  product-list works!
+    product-list works!
 </p>
+<!--  [loadingIndicator]="loadingIndicator" -->
+
+<ngx-datatable class="material colored-header sm table table-striped table-hover"
+               [rows]="rows"
+               [rowHeight]="35"
+               [headerHeight]="35"
+               [footerHeight]="35"
+               [columns]="columns"
+               [scrollbarV]="true"
+               [columnMode]="'force'">
+</ngx-datatable>
+
+<ng-template #indexTemplate let-value="value">
+    <strong>{{value}}</strong>
+</ng-template>
+
+
+<ng-template #actionsTemplate let-row="row" let-value="value" let-i="index">
+    <a class="btn btn-link btn-xs" href="javascript:;" (click)="deleteProduct(row)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+</ng-template>

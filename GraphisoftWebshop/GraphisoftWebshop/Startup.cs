@@ -12,21 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using DAL;
-using DAL.Models;
-using System.Net;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using AutoMapper;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Authorization;
-using AspNet.Security.OpenIdConnect.Primitives;
-using AspNet.Security.OAuth.Validation;
-using Microsoft.AspNetCore.Identity;
 using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
-using System.Collections.Generic;
 using GraphisoftWebshop.Helpers;
+using Quick_Application3.ViewModels;
 
 namespace GraphisoftWebshop
 {
@@ -76,6 +65,14 @@ namespace GraphisoftWebshop
                     Flow = "password",
                     TokenUrl = "/connect/token"
                 });
+            });
+
+            //Configure AutoMapper
+            //Dont work here...
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+
             });
 
             // DB Creation and Seeding
@@ -139,6 +136,7 @@ namespace GraphisoftWebshop
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
 
         }
     }
