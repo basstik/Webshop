@@ -22,9 +22,6 @@ namespace GraphisoftWebshop
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        //private readonly IHostingEnvironment _hostingEnvironment;
-
-
 
         public Startup(IConfiguration configuration)
         {

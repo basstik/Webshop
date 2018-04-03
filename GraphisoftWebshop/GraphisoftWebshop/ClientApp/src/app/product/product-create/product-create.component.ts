@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Product } from '../../models/Product';
 import { AlertService, MessageSeverity } from '../../services/alert.service';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-create',
@@ -12,18 +13,29 @@ import { ProductService } from '../../services/product.service';
 export class ProductCreateComponent implements OnInit {
 
     private productEdit: Product;
-    private showValidationErrors = false;
 
     @ViewChild('f')
     private form;
 
-    @ViewChild('productName')
+    @ViewChild('category')
     private productName;
 
-    @ViewChild('category')
+    @ViewChild('productName')
     private category;
 
-    constructor(private pruductService: ProductService, private alertService: AlertService) { }
+    @ViewChild('description')
+    private description;
+
+    @ViewChild('price')
+    private price;
+
+    @ViewChild('createdBy')
+    private createdBy;
+
+    @ViewChild('email')
+    private email;
+
+    constructor(private pruductService: ProductService, private alertService: AlertService, private router: Router) { }
 
     ngOnInit() {
         this.productEdit = new Product();
@@ -38,14 +50,12 @@ export class ProductCreateComponent implements OnInit {
         this.pruductService.create(this.productEdit).subscribe(product => this.saveSuccessHelper(product), error => this.saveFailedHelper(error));
     }
 
-
     private saveSuccessHelper(product: Product) {
+        console.log("saveSuccessHelper");
         this.alertService.stopLoadingMessage();
-        this.showValidationErrors = false;
-
         this.alertService.showMessage("Success", `Product \"${this.productEdit.name}\" was created successfully`, MessageSeverity.success);
+        this.router.navigate(["/list"]);
     }
-
 
     private saveFailedHelper(error: any) {
         this.alertService.stopLoadingMessage();

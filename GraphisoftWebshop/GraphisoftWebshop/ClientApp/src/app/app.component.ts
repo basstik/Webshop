@@ -22,12 +22,8 @@ export class AppComponent implements OnInit {
     constructor(private alertService: AlertService, private toastyService: ToastyService) { }
 
     ngOnInit(): void {
-        console.log("AppComponnent");
-
         this.alertService.getDialogEvent().subscribe(alert => this.showDialog(alert));
-       // this.alertService.getMessageEvent().subscribe(message => this.showToast(message, false));
         this.alertService.getStickyMessageEvent().subscribe(message => this.showToast(message, true));
-
     }
 
     showDialog(dialog: AlertDialog) {

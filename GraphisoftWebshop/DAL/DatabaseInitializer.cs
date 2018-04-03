@@ -1,8 +1,4 @@
-﻿// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
-
+﻿
 using DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +33,10 @@ namespace DAL
         {
             await _context.Database.MigrateAsync().ConfigureAwait(false);
 
+
+            if (!await _context.Products.AnyAsync())
+            {
+
                 Product prod_1 = new Product
                 {
                     Category = "Sport",
@@ -47,23 +47,23 @@ namespace DAL
                     Email = "tomi@gmail.com",
                 };
 
-            Product prod_2 = new Product
-            {
-                Category = "Car",
-                Name = "BMW sport car",
-                Description = "This is the best car.",
-                Price = 1000000,
-                CreatedBy = "Peter",
-                Email = "peter10@gmail.com",
-            };
+                Product prod_2 = new Product
+                {
+                    Category = "Car",
+                    Name = "BMW sport car",
+                    Description = "This is the best car.",
+                    Price = 1000000,
+                    CreatedBy = "Peter",
+                    Email = "peter10@gmail.com",
+                };
 
-            _context.Products.Add(prod_1);
-            _context.Products.Add(prod_2);
+                _context.Products.Add(prod_1);
+                _context.Products.Add(prod_2);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Seeding initial data completed");
-
+                _logger.LogInformation("Seeding initial data completed");
+            }
         }
     }
 }

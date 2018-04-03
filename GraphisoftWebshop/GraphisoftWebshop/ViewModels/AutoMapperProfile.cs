@@ -1,5 +1,4 @@
-﻿// ====================================================
-
+﻿
 namespace Quick_Application3.ViewModels
 {
     public class AutoMapperProfile : AutoMapper.Profile

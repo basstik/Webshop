@@ -19,16 +19,16 @@ import { ProductListComponent } from './product/product-list/product-list.compon
                 component: WorkshopMainComponent,
                 children: [
                     {
-                        path: "create",
-                        component: ProductCreateComponent,
-                    },
-                    {
                         path: "list",
                         component: ProductListComponent,
                     },
                     {
+                        path: "create",
+                        component: ProductCreateComponent,
+                    },
+                    {
                         path: "",
-                        redirectTo: 'create',
+                        redirectTo: 'list',
                         pathMatch: 'full'
                     },
                     {

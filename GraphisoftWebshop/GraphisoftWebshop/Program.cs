@@ -1,19 +1,10 @@
-// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
-
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using GraphisoftWebshop.Helpers;
 using DAL;
+using Quick_Application3.Helpers;
 
 namespace GraphisoftWebshop
 {

@@ -11,11 +11,9 @@ import { Utilities } from '../../services/utilities';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
     columns: any[] = [];
     rows: Product[] = [];
     loadingIndicator: boolean;
-
 
     @ViewChild('indexTemplate')
     indexTemplate: TemplateRef<any>;
@@ -26,8 +24,6 @@ export class ProductListComponent implements OnInit {
     constructor(private productService: ProductService, private alertService: AlertService) { }
 
     ngOnInit() {
-
-
         this.columns = [
             { prop: "index", name: '#', width: 50, cellTemplate: this.indexTemplate, canAutoResize: false },
             { prop: 'category', name: 'Category', width: 100 },
@@ -48,13 +44,11 @@ export class ProductListComponent implements OnInit {
             result => {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
-
                 this.rows = result;
             },
             error => {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
-
                 this.alertService.showStickyMessage("Load Error", `Unable to retrieve products from the server.\r\nErrors: "${Utilities.getHttpResponseMessage(error)}"`,
                     MessageSeverity.error, error);
 
@@ -63,31 +57,23 @@ export class ProductListComponent implements OnInit {
     }
 
     deleteProduct(row: Product) {
-        console.log("on deleteProduct");
         this.alertService.showDialog('Are you sure you want to delete the \"' + row.name + '\" product?', DialogType.confirm, () => this.deleteProductHelper(row));
     }
 
     deleteProductHelper(row: Product) {
-        console.log("on deleteProduct2");
-
         this.alertService.startLoadingMessage("Deleting...");
         this.loadingIndicator = true;
 
         this.productService.delete(row)
             .subscribe(results => {
-                console.log("on deleteProduct3");
-
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
 
                 this.rows = this.rows.filter(item => item !== row)
             },
             error => {
-                console.log("on deleteProduct4");
-
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
-
                 this.alertService.showStickyMessage("Delete Error", `An error occured whilst deleting the role.\r\nError: "${Utilities.getHttpResponseMessage(error)}"`,
                     MessageSeverity.error, error);
             });

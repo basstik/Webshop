@@ -63,21 +63,9 @@ export class ProductService {
     create(product: Product): Observable<Product> {
         console.log("create");
         console.log("ccc " + this.baseUrl() + this.url + '/create');
+        console.log(JSON.stringify(product));
 
-        let product2: Product = {
-            id: null,
-
-            name: "alma", category: "cat", description: "daea", prise: 10, createdBy: "Vele", email: "dcyfd@va.com"
-        };
-
-
-        let product3: Product;
-        product3 =  {
-            id: null, name: "alma", category: "cat", description: "daea", prise: 10, createdBy: "Vele", email: "dcyfd@va.com"
-        };
-
-
-        return this.http.post<Product>(this.baseUrl() + this.url + '/create', JSON.stringify(product2), this.getRequestHeaders());
+        return this.http.post<Product>(this.baseUrl() + this.url + '/create', JSON.stringify(product), this.getRequestHeaders());
     }
 
  //   list(): Observable<Product[]> {
