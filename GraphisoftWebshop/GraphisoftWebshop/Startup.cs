@@ -68,12 +68,14 @@ namespace GraphisoftWebshop
             });
 
             //Configure AutoMapper
-            //Dont work here...
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();
 
             });
+
+            // Repositories
+            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
 
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();

@@ -19,36 +19,33 @@ namespace GraphisoftWebshop.Controllers
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
-        private ApplicationDbContext db = new DesignTimeDbContextFactory().CreateDbContext(null);
+
+        private IUnitOfWork _unitOfWork;
+
+        public ProductController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: Product
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Product> productss = db.Products;
+            IEnumerable<Product> productss = _unitOfWork.Products.GetAllProductsData();
             // return View(a.ToList());
 
-            Product p = new Product();
-            p.Id = 1;
-            p.Category = "vanan";
+            //Product p = new Product();
+            //p.Id = 1;
+            //p.Category = "vanan";
 
-            List<Product> products = new List<Product>();
-            products.Add(p);
-            foreach (Product element in products)
-            {
-                System.Console.WriteLine(element.Category);
-            }
-
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-
-            });
+            //List<Product> products = new List<Product>();
+            //products.Add(p);
+            //foreach (Product element in products)
+            //{
+            //    System.Console.WriteLine(element.Category);
+            //}
 
             IEnumerable<ProductViewModel> a = Mapper.Map<IEnumerable<ProductViewModel>>(productss);
-
-            ProductViewModel a2 = Mapper.Map<ProductViewModel>(productss);
-
 
             return Ok(a);
 
@@ -57,13 +54,13 @@ namespace GraphisoftWebshop.Controllers
         // POST: /delete/5
         [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id) {
-            Product product = db.Products.Find(id);
+            Product product = _unitOfWork.Products.Get(id);
             if (product == null)
             {
                 return NotFound();
             }
-            db.Products.Remove(product);
-            db.SaveChanges();
+            _unitOfWork.Products.Remove(product);
+            _unitOfWork.SaveChanges();
             return Ok(id);
         }
 
@@ -79,16 +76,10 @@ namespace GraphisoftWebshop.Controllers
                       return BadRequest($"{nameof(productViewModel)} cannot be null");
                 }
 
-                Mapper.Initialize(cfg =>
-                {
-                    cfg.AddProfile<AutoMapperProfile>();
-
-                });
-
                 Product product = Mapper.Map<Product>(productViewModel);
 
-                db.Products.Add(product);
-                db.SaveChanges();
+                _unitOfWork.Products.Add(product);
+                _unitOfWork.SaveChanges();
 
                 return CreatedAtAction("GetRoleById", new { id = product.Id }, product);
             }

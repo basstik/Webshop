@@ -18,6 +18,7 @@ namespace DAL
 {
     public class ApplicationDbContext : DbContext
     {
+        public string CurrentUserId { get; set; }
 
         public DbSet<Product> Products { get; set; }
 

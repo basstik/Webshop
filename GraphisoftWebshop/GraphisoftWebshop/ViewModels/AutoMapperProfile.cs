@@ -1,17 +1,4 @@
 ﻿// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
-
-using AutoMapper;
-using DAL.Models;
-using GraphisoftWebshop.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quick_Application3.ViewModels
 {
@@ -19,9 +6,9 @@ namespace Quick_Application3.ViewModels
     {
         public AutoMapperProfile()
         {
-            CreateMap<Product, ProductViewModel>();
+            CreateMap<DAL.Models.Product, GraphisoftWebshop.ViewModels.ProductViewModel>();
 
-            CreateMap<ProductViewModel, Product>();
+            CreateMap<GraphisoftWebshop.ViewModels.ProductViewModel, DAL.Models.Product>();
 
         }
     }
