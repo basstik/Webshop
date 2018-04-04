@@ -83,7 +83,7 @@
         </div>
 
         <div class="form-group has-feedback">
-            <label class="control-label col-md-2" for="saved">Username</label>
+            <label class="control-label col-md-2" for="createdBy">Username</label>
             <div class="col-md-10">
                 <input type="text" attr.id="createdBy" name="createdBy" placeholder="Enter createdBy name"
                        class="form-control" [(ngModel)]="productEdit.createdBy" #createdBy="ngModel" required maxlength="200" />
@@ -104,7 +104,7 @@
             <label class="control-label col-md-2" for="email">Email</label>
             <div class="col-md-10">
                 <input type="email" attr.id="email" name="email" placeholder="Enter email name"
-                       class="form-control" [(ngModel)]="productEdit.email" #email="ngModel" required maxlength="200" />
+                       class="form-control" [(ngModel)]="productEdit.email" #email="ngModel" required email />
                 <span *ngIf="f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': email.valid, 'glyphicon-remove' : !email.valid}"></span>
                 <span *ngIf="f.submitted && !email.valid" class="errorMessage">
                     Email address is required.

@@ -17,23 +17,6 @@ export class ProductCreateComponent implements OnInit {
     @ViewChild('f')
     private form;
 
-    @ViewChild('category')
-    private productName;
-
-    @ViewChild('productName')
-    private category;
-
-    @ViewChild('description')
-    private description;
-
-    @ViewChild('price')
-    private price;
-
-    @ViewChild('createdBy')
-    private createdBy;
-
-    @ViewChild('email')
-    private email;
 
     constructor(private pruductService: ProductService, private alertService: AlertService, private router: Router) { }
 
