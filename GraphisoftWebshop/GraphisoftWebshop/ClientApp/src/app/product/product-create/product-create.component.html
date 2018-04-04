@@ -103,7 +103,7 @@
         <div class="form-group has-feedback">
             <label class="control-label col-md-2" for="email">Email</label>
             <div class="col-md-10">
-                <input type="text" attr.id="email" name="email" placeholder="Enter email name"
+                <input type="email" attr.id="email" name="email" placeholder="Enter email name"
                        class="form-control" [(ngModel)]="productEdit.email" #email="ngModel" required maxlength="200" />
                 <span *ngIf="f.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': email.valid, 'glyphicon-remove' : !email.valid}"></span>
                 <span *ngIf="f.submitted && !email.valid" class="errorMessage">
