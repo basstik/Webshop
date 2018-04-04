@@ -5,7 +5,7 @@
         <h3>Create products</h3>
     </header>
 
-    <form #f="ngForm" (ngSubmit)="f.form.valid ? save() :
+    <form #f="ngForm" (ngSubmit)="f.form.valid ? checkEmailAndSave() :
      (!category.valid && showErrorAlert('Category is required', 'Please enter a category'));
      (!productName.valid && showErrorAlert('Name is required', 'Please enter a product name (minimum of 6 and maximum of 200 characters)'));
      (!price.valid && showErrorAlert('Price is required', 'Please enter a price of product'));

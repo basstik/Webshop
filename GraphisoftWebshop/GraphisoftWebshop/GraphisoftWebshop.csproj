@@ -22,6 +22,7 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="7.5.0" />
     <PackageReference Include="MailKit" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.0.0" />
     <PackageReference Include="OpenIddict" Version="2.0.0-rc2-final" />
@@ -56,6 +57,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\product\" />
+    <Folder Include="Logs\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
