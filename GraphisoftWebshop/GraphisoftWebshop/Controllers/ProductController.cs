@@ -1,18 +1,12 @@
 ﻿
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using AutoMapper;
 using DAL;
 using DAL.Models;
+using GraphisoftWebshop.Services;
 using GraphisoftWebshop.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Quick_Application3.ViewModels;
-using StackExchange.Redis;
+
 
 namespace GraphisoftWebshop.Controllers
 {
@@ -21,9 +15,12 @@ namespace GraphisoftWebshop.Controllers
     {
         private IUnitOfWork _unitOfWork;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        private IEmailAuthenticationService _emailController;
+
+        public ProductController(IUnitOfWork unitOfWork, IEmailAuthenticationService emailController)
         {
             _unitOfWork = unitOfWork;
+            _emailController = emailController;
         }
 
         // GET: Product
@@ -58,12 +55,18 @@ namespace GraphisoftWebshop.Controllers
                       return BadRequest($"{nameof(productViewModel)} cannot be null");
                 }
 
+                if (!_emailController.Authentication(productViewModel.Email))
+                {
+                    return BadRequest("Email authenticatoin failed");
+                }
+
                 Product product = Mapper.Map<Product>(productViewModel);
 
                 _unitOfWork.Products.Add(product);
                 _unitOfWork.SaveChanges();
 
                 return CreatedAtAction("CreateProduct", new { id = product.Id }, product);
+
             }
             return BadRequest(ModelState);
 

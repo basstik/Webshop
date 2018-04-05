@@ -1,17 +1,7 @@
-﻿// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
-
-using AspNet.Security.OpenIdConnect.Primitives;
+﻿
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraphisoftWebshop.Helpers
 {
@@ -31,7 +21,6 @@ namespace GraphisoftWebshop.Helpers
             if (_loggerFactory == null)
             {
                 throw new InvalidOperationException($"{nameof(ILogger)} is not configured. {nameof(ConfigureLogger)} must be called before use");
-                //_loggerFactory = new LoggerFactory().AddConsole().AddDebug();
             }
 
             return _loggerFactory.CreateLogger<T>();

@@ -16,6 +16,7 @@ using AutoMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using GraphisoftWebshop.Helpers;
 using Quick_Application3.ViewModels;
+using GraphisoftWebshop.Services;
 
 namespace GraphisoftWebshop
 {
@@ -74,6 +75,9 @@ namespace GraphisoftWebshop
             // Repositories
             services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
 
+            // Email authentication service
+            services.AddScoped<IEmailAuthenticationService, EmailAuthenticationService>();
+            
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
