@@ -7,6 +7,7 @@ namespace GraphisoftWebshop.Services
 {
     public interface IEmailAuthenticationService
     {
-        Boolean Authentication(String email);
+        Task<Boolean> Authentication(String email);
+
     }
 }
