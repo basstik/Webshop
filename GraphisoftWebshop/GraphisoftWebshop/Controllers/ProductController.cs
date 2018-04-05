@@ -63,7 +63,7 @@ namespace GraphisoftWebshop.Controllers
                 }
                 catch (AggregateException ae)
                 {
-                   return BadRequest("Email authenticatoin failed");
+                   return BadRequest("Email authentication failed");
                 }
 
                 Product product = Mapper.Map<Product>(productViewModel);

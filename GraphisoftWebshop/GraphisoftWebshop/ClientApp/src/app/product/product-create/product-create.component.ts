@@ -5,6 +5,7 @@ import { AlertService, MessageSeverity } from '../../services/alert.service';
 import { ProductService } from '../../services/product.service';
 
 import { Router } from '@angular/router';
+import { EmailService } from '../../services/EmailService';
 
 @Component({
   selector: 'app-product-create',
@@ -14,18 +15,47 @@ import { Router } from '@angular/router';
 export class ProductCreateComponent implements OnInit {
 
     private productEdit: Product;
+    public isAuthenticatedEmail: boolean = false;
 
     @ViewChild('f')
     private form;
 
+    @ViewChild('category')
+    private productName;
+
+    @ViewChild('productName')
+    private category;
+
+    @ViewChild('description')
+    private description;
+
+    @ViewChild('price')
+    private price;
+
+    @ViewChild('createdBy')
+    private createdBy;
+
+    @ViewChild('email')
+    private email;
 
     constructor(
         private pruductService: ProductService,
         private alertService: AlertService,
-        private router: Router) { }
+        private router: Router,
+        private emailService: EmailService) { }
 
     ngOnInit() {
         this.productEdit = new Product();
+    }
+
+    private emailValidate() {
+        console.log("EmailValidate");
+        this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
+            this.isAuthEmail = valid;
+            console.log("EmailValidate" + this.isAuthenticatedEmail);
+
+
+        });
     }
 
     private showErrorAlert(caption: string, message: string) {

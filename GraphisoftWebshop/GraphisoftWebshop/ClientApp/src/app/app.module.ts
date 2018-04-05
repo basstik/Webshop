@@ -33,6 +33,7 @@ import { ProductService } from "./services/product.service";
 import { NetworkService } from "./services/NetworkService";
 import { HttpWrapper } from "./services/HttpWrapper";
 import { AlertService } from "./services/alert.service";
+import { EmailService } from "./services/EmailService";
 
 @NgModule({
     imports: [
@@ -64,6 +65,7 @@ import { AlertService } from "./services/alert.service";
         AlertService,
         ToastyService,
         ProductService,
+        EmailService,
     ],
     bootstrap: [AppComponent]
 })

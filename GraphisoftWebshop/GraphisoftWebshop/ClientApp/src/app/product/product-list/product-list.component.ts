@@ -40,7 +40,7 @@ export class ProductListComponent implements OnInit {
         this.alertService.startLoadingMessage();
         this.loadingIndicator = true;
 
-        this.productService.list2().subscribe(
+        this.productService.list().subscribe(
             result => {
                 this.alertService.stopLoadingMessage();
                 this.loadingIndicator = false;
