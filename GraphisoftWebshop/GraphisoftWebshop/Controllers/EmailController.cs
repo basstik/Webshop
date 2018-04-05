@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quick_Application3.ViewModels;
 using StackExchange.Redis;
 
@@ -62,22 +63,23 @@ namespace GraphisoftWebshop.Controllers
         {
             GraphisoftUserDto graphisoftUserDto = new GraphisoftUserDto(email);
             ReqBody r = new ReqBody();
-                r.GraphisoftUserDto = graphisoftUserDto;
-            _logger.LogInformation(r.GraphisoftUserDto.EmailAddress);
+            r.GraphisoftUserDto = graphisoftUserDto;
 
-            _logger.LogInformation("////////////////////" + Newtonsoft.Json.JsonConvert.SerializeObject(r));
+            JObject rss = new JObject(new JProperty("GraphisoftUserDto", new JObject(new JProperty("emailaddress", email))));
 
-   
-            StringContent queryString = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(r), Encoding.UTF8, "application/json"); //CONTENT-TYPE header);
+            JObject o = JObject.FromObject(new
+            {
+                GraphisoftUserDto = new
+                {
+                    emailaddress = email,
+                }
+            });
 
-
-            //            HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/PostIsUserWithEmailExists", r);
+            StringContent queryString = new StringContent(rss.ToString(), Encoding.UTF8, "application/json"); //CONTENT-TYPE header;
+  
             HttpResponseMessage response = await client.PostAsync("api/Account/PostIsUserWithEmailExists", queryString);
 
-            _logger.LogInformation("////////////////////" + response.Content.ReadAsStringAsync());
-
             response.EnsureSuccessStatusCode();
-
 
             // Deserialize the updated product from the response body.
             GraphisoftResponse re = await response.Content.ReadAsAsync<GraphisoftResponse>();
