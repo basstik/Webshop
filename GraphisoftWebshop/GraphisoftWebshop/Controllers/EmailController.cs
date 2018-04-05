@@ -52,7 +52,7 @@ namespace GraphisoftWebshop.Controllers
             // Update port # in the following line.
             client.BaseAddress = new Uri("https://graphisoftid-api-test.graphisoft.com/");
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));   //ACCEPT header
             return PostEmailAsync(email);
 
         }
@@ -67,8 +67,13 @@ namespace GraphisoftWebshop.Controllers
 
             _logger.LogInformation("////////////////////" + Newtonsoft.Json.JsonConvert.SerializeObject(r));
 
+   
+            StringContent queryString = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(r), Encoding.UTF8, "application/json"); //CONTENT-TYPE header);
 
-            HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/PostIsUserWithEmailExists", r);
+
+            //            HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/PostIsUserWithEmailExists", r);
+            HttpResponseMessage response = await client.PostAsync("api/Account/PostIsUserWithEmailExists", queryString);
+
             _logger.LogInformation("////////////////////" + response.Content.ReadAsStringAsync());
 
             response.EnsureSuccessStatusCode();
