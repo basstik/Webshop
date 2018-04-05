@@ -61,19 +61,7 @@ namespace GraphisoftWebshop.Controllers
 
         async Task<Boolean> PostEmailAsync(String email)
         {
-            GraphisoftUserDto graphisoftUserDto = new GraphisoftUserDto(email);
-            ReqBody r = new ReqBody();
-            r.GraphisoftUserDto = graphisoftUserDto;
-
             JObject rss = new JObject(new JProperty("GraphisoftUserDto", new JObject(new JProperty("emailaddress", email))));
-
-            JObject o = JObject.FromObject(new
-            {
-                GraphisoftUserDto = new
-                {
-                    emailaddress = email,
-                }
-            });
 
             StringContent queryString = new StringContent(rss.ToString(), Encoding.UTF8, "application/json"); //CONTENT-TYPE header;
   
@@ -81,10 +69,11 @@ namespace GraphisoftWebshop.Controllers
 
             response.EnsureSuccessStatusCode();
 
-            // Deserialize the updated product from the response body.
-            GraphisoftResponse re = await response.Content.ReadAsAsync<GraphisoftResponse>();
+            String re = await response.Content.ReadAsStringAsync();
 
-            return Boolean.Parse(re.UserWithEmailExists);
+            // return Boolean.Parse(JObject.Parse(re).GetValue("UserWithEmailExists")));
+             return Boolean.Parse(JObject.Parse(re).GetValue("UserWithEmailExists").ToString());
+
         }
     }
 }
