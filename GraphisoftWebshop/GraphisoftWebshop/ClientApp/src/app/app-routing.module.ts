@@ -7,9 +7,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { WorkshopMainComponent } from './components/workshop-main/workshop-main.component';
-import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
 
 @NgModule({
     imports: [

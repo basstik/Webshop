@@ -17,13 +17,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppErrorHandler } from './app-error.handler';
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { WorkshopMainComponent } from "./components/workshop-main/workshop-main.component";
-import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductService } from "./services/product.service";
 import { AlertService } from "./services/alert.service";
 import { NetworkService } from "./services/network.service";
 import { EmailService } from "./services/email.services";
+import { ProductCreateComponent } from "./components/product-create/product-create.component";
+import { ProductListComponent } from "./components/product-list/product-list.component";
 
 @NgModule({
     imports: [
