@@ -4,13 +4,11 @@
         <h3>Create products</h3>
     </header>
 
-    <form #f="ngForm" (ngSubmit)="f.form.valid ? save() :
+    <form #f="ngForm" (ngSubmit)="f.form.valid ? actionOnSubmit() :
      (!category.valid && showErrorAlert('Category is required', 'Please enter a category'));
      (!productName.valid && showErrorAlert('Name is required', 'Please enter a product name (minimum of 6 and maximum of 200 characters)'));
      (!price.valid && showErrorAlert('Price is required', 'Please enter a price of product'));
      (!createdBy.valid && showErrorAlert('Username is required', 'Please enter a username'));
-     (!!isAuthenticatedEmail && showErrorAlert('Email is invalid'));
-
      (!email.valid && showErrorAlert('Email is required', 'Please enter a product name (minimum of 5 and maximum of 200 characters)'));
       ">
 
@@ -110,9 +108,6 @@
                 <span *ngIf="f.submitted && !email.valid" class="errorMessage">
                     Email address is required.
                 </span>
-                <span *ngIf="f.submitted && email.valid && !isAuthenticatedEmail" class="errorMessage">
-                   This email is invalid.
-                </span>
             </div>
         </div>
 
@@ -125,7 +120,7 @@
         <div class="form-group">
             <div class="col-sm-7">
                 <div class="pull-right">
-                    <button type="submit" (click)="emailValidate()" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>

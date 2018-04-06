@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators/catchError';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/observable/throw';
 
 import { environment } from '../../environments/environment';
@@ -11,12 +13,13 @@ import { HttpOptions } from '../interfaces/http-options.interface';
 
 @Injectable()
 export class NetworkService {
-    private baseUrl: string = environment.API_URL;
+
+    private baseUrl: string;
 
     // any should be yours generic Error wrapper
     public networkError: Subject<HttpResponse<any>> = new Subject();
 
-    constructor(public http: HttpClient) { }
+    constructor(public http: HttpClient) { this.baseUrl = this.getBaseUrl(); }
 
     public post<T>(path: string, payload: any = null, opts?: HttpOptions): Observable<T> {
         return this.makeRequest<T>(this.http.post.bind(this.http, this.buildUrl(path, {}), payload), opts);
@@ -44,9 +47,8 @@ export class NetworkService {
             responseType: 'json',
             observe: 'body',
             headers: {
-                //  'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                  'Content-Type': 'application/json',
-                //  'Access-Control-Allow-Credentials': 'true',
+                'Content-Type': 'application/json',
+                'Accept': `application/json`,
             },
             withCredentials: true,
         };
@@ -61,13 +63,9 @@ export class NetworkService {
         options: HttpOptions = this.generateOptions()
     ): Observable<T> {
         return httpFn(options).pipe(
-            catchError((response, caught) => {
+            catchError((response) => {
                 if (!response.ok) {
-                    console.warn(
-                        `[NetworkService][makeRequest] The request ${response.url} has failed and returned with ${
-                        response.status
-                        } status code.`
-                    );
+                    this.handleError(response);
 
                     this.networkError.next(response);
                     // https://stackoverflow.com/a/36656026/2019689
@@ -106,5 +104,35 @@ export class NetworkService {
         }
 
         return `${this.baseUrl}${slug}${this.buildParamsQuery(queryParams)}`;
+    }
+
+    /**
+    * Write the error message to console log.
+    */
+    private handleError<T>(error): Observable<T> {
+        if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+        } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.error(
+                `Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`);
+        }
+        // return an ErrorObservable with a user-facing error message
+        return new ErrorObservable(
+            'Something bad happened; please try again later.');
+    };
+
+    private getBaseUrl(): string {
+        let base = '';
+
+        if (window.location.origin)
+            base = window.location.origin;
+        else
+            base = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
+        return base.replace(/\/$/, '');
     }
 }

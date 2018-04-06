@@ -1,15 +1,11 @@
-// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
-
 import { Component, OnInit} from "@angular/core";
 import { Router, NavigationStart } from '@angular/router';
-import { AlertService, AlertDialog, DialogType, AlertMessage } from "./services/alert.service";
+
 import { ToastData, ToastOptions, ToastyService } from "ng2-toasty";
 
-var alertify: any = require('./assets/scripts/alertify.js');
+import { AlertService, AlertDialog, DialogType, AlertMessage } from "./services/alert.service";
 
+var alertify: any = require('./assets/scripts/alertify.js');
 
 @Component({
   selector: "app-root",

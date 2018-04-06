@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { Product } from '../../models/Product';
 import { AlertService, MessageSeverity } from '../../services/alert.service';
 import { ProductService } from '../../services/product.service';
-
-import { Router } from '@angular/router';
-import { EmailService } from '../../services/EmailService';
+import { EmailService } from '../../services/email.services';
 
 @Component({
   selector: 'app-product-create',
@@ -15,10 +15,9 @@ import { EmailService } from '../../services/EmailService';
 export class ProductCreateComponent implements OnInit {
 
     private productEdit: Product;
-    public isAuthenticatedEmail: boolean = false;
 
     @ViewChild('f')
-    private form;
+    private form: NgForm;
 
     @ViewChild('category')
     private productName;
@@ -48,9 +47,13 @@ export class ProductCreateComponent implements OnInit {
         this.productEdit = new Product();
     }
 
+    isss: boolean = false;
+
     private emailValidate() {
+        console.log("emailvalidate");
         this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
-            this.isAuthenticatedEmail = valid;
+            console.log("v" + valid);
+            return valid;
         });
     }
 
@@ -58,13 +61,27 @@ export class ProductCreateComponent implements OnInit {
         this.alertService.showMessage(caption, message, MessageSeverity.error);
     }
 
-    private save() {
+    private actionOnSubmit() {
         this.alertService.startLoadingMessage("Saving changes...");
-        this.pruductService.create(this.productEdit).subscribe(
+
+        this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
+            console.log("v" + valid);
+
+            if (valid) {
+                this.save();
+            } else {
+                this.alertService.stopLoadingMessage();
+                this.alertService.showMessage("Warning", "Email address isn't authorized.", MessageSeverity.warn);
+            }
+        });
+    }
+
+    private save() {
+       return this.pruductService.create(this.productEdit).subscribe(
             product => this.saveSuccessHelper(product),
             error => this.saveFailedHelper(error));
-
     }
+
 
     private saveSuccessHelper(product: Product) {
         this.alertService.stopLoadingMessage();

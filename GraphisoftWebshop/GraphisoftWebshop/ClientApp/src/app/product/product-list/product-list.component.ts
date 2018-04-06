@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
+
+import { DialogType, AlertService, MessageSeverity } from '../../services/alert.service';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/Product';
-import { forEach } from '@angular/router/src/utils/collection';
-import { DialogType, AlertService, MessageSeverity } from '../../services/alert.service';
 import { Utilities } from '../../services/utilities';
 
 @Component({
