@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F573B581-B6FA-45EB-8C6B-04D27F48F43E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphisoftWebshop", "GraphisoftWebshop\GraphisoftWebshop\GraphisoftWebshop.csproj", "{543351B0-61C7-4049-9798-599E0D1032B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphisoftWebshop", "GraphisoftWebshop\GraphisoftWebshop\GraphisoftWebshop.csproj", "{543351B0-61C7-4049-9798-599E0D1032B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "GraphisoftWebshop\DAL\DAL.csproj", "{0576BA5A-684F-44F3-9FDF-9D98E97C643B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "GraphisoftWebshop\DAL\DAL.csproj", "{0576BA5A-684F-44F3-9FDF-9D98E97C643B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

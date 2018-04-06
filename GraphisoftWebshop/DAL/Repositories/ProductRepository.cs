@@ -19,8 +19,10 @@ namespace DAL.Repositories
         public ProductRepository(DbContext context) : base(context)
         { }
 
-
-
+        public IEnumerable<Product> GetAllProductsData()
+        {
+            return _appContext.Products.ToList();
+        }
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
     }

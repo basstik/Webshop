@@ -42,7 +42,6 @@ export class AlertService {
     showMessage(summaryAndDetails: string[], summaryAndDetailsSeparator: string, severity: MessageSeverity)
     showMessage(response: HttpResponseBase, ignoreValue_useNull: string, severity: MessageSeverity)
     showMessage(data: any, separatorOrDetail?: string, severity?: MessageSeverity) {
-
         if (!severity)
             severity = MessageSeverity.default;
 

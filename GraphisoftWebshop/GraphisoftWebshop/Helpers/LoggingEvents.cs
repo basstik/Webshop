@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraphisoftWebshop.Helpers
+namespace Quick_Application3.Helpers
 {
     public static class LoggingEvents
     {
