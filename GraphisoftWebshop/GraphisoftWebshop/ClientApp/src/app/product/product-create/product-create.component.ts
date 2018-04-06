@@ -47,16 +47,6 @@ export class ProductCreateComponent implements OnInit {
         this.productEdit = new Product();
     }
 
-    isss: boolean = false;
-
-    private emailValidate() {
-        console.log("emailvalidate");
-        this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
-            console.log("v" + valid);
-            return valid;
-        });
-    }
-
     private showErrorAlert(caption: string, message: string) {
         this.alertService.showMessage(caption, message, MessageSeverity.error);
     }
@@ -66,12 +56,11 @@ export class ProductCreateComponent implements OnInit {
 
         this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
             console.log("v" + valid);
-
             if (valid) {
                 this.save();
             } else {
                 this.alertService.stopLoadingMessage();
-                this.alertService.showMessage("Warning", "Email address isn't authorized.", MessageSeverity.warn);
+                this.showErrorAlert("Error", "Email address isn't authorized.");
             }
         });
     }
@@ -81,7 +70,6 @@ export class ProductCreateComponent implements OnInit {
             product => this.saveSuccessHelper(product),
             error => this.saveFailedHelper(error));
     }
-
 
     private saveSuccessHelper(product: Product) {
         this.alertService.stopLoadingMessage();
@@ -94,5 +82,4 @@ export class ProductCreateComponent implements OnInit {
         this.alertService.showStickyMessage("Save Error", "The below errors occured whilst saving your changes:", MessageSeverity.error, error);
         this.alertService.showStickyMessage(error, null, MessageSeverity.error);
     }
-
 }

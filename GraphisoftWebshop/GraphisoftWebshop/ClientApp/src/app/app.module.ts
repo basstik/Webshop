@@ -1,14 +1,9 @@
-// ====================================================
-// More Templates: https://www.ebenmonney.com/templates
-// Email: support@ebenmonney.com
-// ====================================================
 
 import { NgModule, ErrorHandler } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
