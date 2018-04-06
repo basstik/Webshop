@@ -49,12 +49,8 @@ export class ProductCreateComponent implements OnInit {
     }
 
     private emailValidate() {
-        console.log("EmailValidate");
         this.emailService.authenticateEmail(this.productEdit.email).subscribe(valid => {
-            this.isAuthEmail = valid;
-            console.log("EmailValidate" + this.isAuthenticatedEmail);
-
-
+            this.isAuthenticatedEmail = valid;
         });
     }
 
@@ -68,10 +64,6 @@ export class ProductCreateComponent implements OnInit {
             product => this.saveSuccessHelper(product),
             error => this.saveFailedHelper(error));
 
-    }
-
-    private authenticateEmail(arg0: string): any {
-        throw new Error("Method not implemented.");
     }
 
     private saveSuccessHelper(product: Product) {

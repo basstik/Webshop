@@ -110,7 +110,7 @@
                 <span *ngIf="f.submitted && !email.valid" class="errorMessage">
                     Email address is required.
                 </span>
-                <span *ngIf="f.submitted && !isAuthenticatedEmail" class="errorMessage">
+                <span *ngIf="f.submitted && email.valid && !isAuthenticatedEmail" class="errorMessage">
                    This email is invalid.
                 </span>
             </div>
